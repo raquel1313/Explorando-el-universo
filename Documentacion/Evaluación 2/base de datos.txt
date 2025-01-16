@@ -1,0 +1,202 @@
+-- Generado por Oracle SQL Developer Data Modeler 24.3.1.351.0831
+--   en:        2025-01-15 23:46:25 CLST
+--   sitio:      Oracle Database 11g
+--   tipo:      Oracle Database 11g
+
+
+
+-- predefined type, no DDL - MDSYS.SDO_GEOMETRY
+
+-- predefined type, no DDL - XMLTYPE
+
+CREATE TABLE Administrador 
+    ( 
+     id_adm          NUMBER  NOT NULL , 
+     nombre_adm      VARCHAR2 (150)  NOT NULL , 
+     correo_adm      VARCHAR2 (30)  NOT NULL , 
+     contrasenna_adm VARCHAR2 (30)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE Administrador 
+    ADD CONSTRAINT Administrador_PK PRIMARY KEY ( id_adm ) ;
+
+CREATE TABLE Comentario 
+    ( 
+     id_com            NUMBER  NOT NULL , 
+     texto_com         VARCHAR2 (600)  NOT NULL , 
+     fecha_com         DATE  NOT NULL , 
+     Estudiante_id_est NUMBER (5)  NOT NULL 
+    ) 
+;
+
+ALTER TABLE Comentario 
+    ADD CONSTRAINT Comentario_PK PRIMARY KEY ( id_com ) ;
+
+CREATE TABLE Curso 
+    ( 
+     id_curso          NUMBER  NOT NULL , 
+     nombre_curso      VARCHAR2 (60)  NOT NULL , 
+     descripcion_curso VARCHAR2 (600)  NOT NULL , 
+     Profesor_id_prof  NUMBER  NOT NULL 
+    ) 
+;
+
+ALTER TABLE Curso 
+    ADD CONSTRAINT Curso_PK PRIMARY KEY ( id_curso ) ;
+
+CREATE TABLE Estudiante 
+    ( 
+     id_est               NUMBER (5)  NOT NULL , 
+     nombre_est           VARCHAR2 (150) , 
+     correo_est           VARCHAR2 (50) , 
+     contrasenna_est      VARCHAR2 (30)  NOT NULL , 
+     rut_est              NUMBER (10)  NOT NULL , 
+     país_est             VARCHAR2 (30) , 
+     fecha_nacimiento_est DATE , 
+     link_est             VARCHAR2 (50) , 
+     interes_est          VARCHAR2 (300) 
+    ) 
+;
+
+ALTER TABLE Estudiante 
+    ADD CONSTRAINT Estudiante_PK PRIMARY KEY ( id_est ) ;
+
+CREATE TABLE Evaluacion 
+    ( 
+     id_eva         NUMBER  NOT NULL , 
+     titulo_eva     VARCHAR2 (30)  NOT NULL , 
+     fecha_eva      DATE  NOT NULL , 
+     Curso_id_curso NUMBER  NOT NULL 
+    ) 
+;
+
+ALTER TABLE Evaluacion 
+    ADD CONSTRAINT Evaluacion_PK PRIMARY KEY ( id_eva ) ;
+
+CREATE TABLE Inscripcion 
+    ( 
+     Estudiante_id_est NUMBER (5)  NOT NULL , 
+     Curso_id_curso    NUMBER  NOT NULL 
+    ) 
+;
+
+ALTER TABLE Inscripcion 
+    ADD CONSTRAINT Relation_2_PK PRIMARY KEY ( Estudiante_id_est, Curso_id_curso ) ;
+
+CREATE TABLE Profesor 
+    ( 
+     id_prof               NUMBER  NOT NULL , 
+     nombre_prof           VARCHAR2 (150)  NOT NULL , 
+     correo_prof           VARCHAR2 (50)  NOT NULL , 
+     rut_prof              VARCHAR2 (10)  NOT NULL , 
+     contrasenna_prof      VARCHAR2 (30)  NOT NULL , 
+     info_academica_prof   VARCHAR2 (500) , 
+     info_profesional_prof VARCHAR2 (500) , 
+     link_prof             VARCHAR2 (50) , 
+     interes_prof          VARCHAR2 (300) 
+    ) 
+;
+
+ALTER TABLE Profesor 
+    ADD CONSTRAINT Profesor_PK PRIMARY KEY ( id_prof ) ;
+
+ALTER TABLE Comentario 
+    ADD CONSTRAINT Comentario_Estudiante_FK FOREIGN KEY 
+    ( 
+     Estudiante_id_est
+    ) 
+    REFERENCES Estudiante 
+    ( 
+     id_est
+    ) 
+;
+
+ALTER TABLE Curso 
+    ADD CONSTRAINT Curso_Profesor_FK FOREIGN KEY 
+    ( 
+     Profesor_id_prof
+    ) 
+    REFERENCES Profesor 
+    ( 
+     id_prof
+    ) 
+;
+
+ALTER TABLE Evaluacion 
+    ADD CONSTRAINT Evaluacion_Curso_FK FOREIGN KEY 
+    ( 
+     Curso_id_curso
+    ) 
+    REFERENCES Curso 
+    ( 
+     id_curso
+    ) 
+;
+
+ALTER TABLE Inscripcion 
+    ADD CONSTRAINT Relation_2_Curso_FK FOREIGN KEY 
+    ( 
+     Curso_id_curso
+    ) 
+    REFERENCES Curso 
+    ( 
+     id_curso
+    ) 
+;
+
+ALTER TABLE Inscripcion 
+    ADD CONSTRAINT Relation_2_Estudiante_FK FOREIGN KEY 
+    ( 
+     Estudiante_id_est
+    ) 
+    REFERENCES Estudiante 
+    ( 
+     id_est
+    ) 
+;
+
+
+
+-- Informe de Resumen de Oracle SQL Developer Data Modeler: 
+-- 
+-- CREATE TABLE                             7
+-- CREATE INDEX                             0
+-- ALTER TABLE                             12
+-- CREATE VIEW                              0
+-- ALTER VIEW                               0
+-- CREATE PACKAGE                           0
+-- CREATE PACKAGE BODY                      0
+-- CREATE PROCEDURE                         0
+-- CREATE FUNCTION                          0
+-- CREATE TRIGGER                           0
+-- ALTER TRIGGER                            0
+-- CREATE COLLECTION TYPE                   0
+-- CREATE STRUCTURED TYPE                   0
+-- CREATE STRUCTURED TYPE BODY              0
+-- CREATE CLUSTER                           0
+-- CREATE CONTEXT                           0
+-- CREATE DATABASE                          0
+-- CREATE DIMENSION                         0
+-- CREATE DIRECTORY                         0
+-- CREATE DISK GROUP                        0
+-- CREATE ROLE                              0
+-- CREATE ROLLBACK SEGMENT                  0
+-- CREATE SEQUENCE                          0
+-- CREATE MATERIALIZED VIEW                 0
+-- CREATE MATERIALIZED VIEW LOG             0
+-- CREATE SYNONYM                           0
+-- CREATE TABLESPACE                        0
+-- CREATE USER                              0
+-- 
+-- DROP TABLESPACE                          0
+-- DROP DATABASE                            0
+-- 
+-- REDACTION POLICY                         0
+-- 
+-- ORDS DROP SCHEMA                         0
+-- ORDS ENABLE SCHEMA                       0
+-- ORDS ENABLE OBJECT                       0
+-- 
+-- ERRORS                                   0
+-- WARNINGS                                 0
