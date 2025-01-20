@@ -1,8 +1,10 @@
-# plataforma/urls.py
 from django.urls import path
-from .views import index 
+from .views import *
 
 urlpatterns = [
-    path('', index, name='index'),  # Ruta para la página de inicio
-    # Puedes agregar más rutas aquí para otras vistas (e.g., registro, inicio de sesión)
+    path('',HomeView.as_view(), name='home'),
+    path('cursos/',CursosView.as_view(), name='cursos'),
+    path('progreso/',ProgresoView.as_view(), name='progreso'),
+    path('profile/',PerfilView.as_view(), name='profile'),
+    path('login/',login_view, name='login'),
 ]
