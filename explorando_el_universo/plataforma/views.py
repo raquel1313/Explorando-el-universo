@@ -31,13 +31,18 @@ class PerfilView(LoginRequiredMixin, TemplateView):
 
 def login(request):
     if request.method == "POST":
-        form =AuthenticationForm(data=request.POST)
+        form = AuthenticationForm(request, data=request.POST)
+        form.fields['username'].widget.attrs.update({'class': 'form-control'})
+        form.fields['password'].widget.attrs.update({'class': 'form-control'})
         if form.is_valid():
-            
+            user = form.get_user()
+            login(request, user)
             return redirect("profile")
     else:
         form = AuthenticationForm()
-    return render(request, "registration/login.html", {"form" : form})
+        form.fields['username'].widget.attrs.update({'class': 'form-control'})
+        form.fields['password'].widget.attrs.update({'class': 'form-control'})
+    return render(request, "registration/login.html", {"form": form})
 
 
 
@@ -63,3 +68,4 @@ def crear_curso(request):
 def lista_cursos(request):
     cursos = Curso.objects.all()  # Obtiene todos los cursos
     return render(request, 'cursos.html', {'cursos': cursos})
+
