@@ -1,6 +1,8 @@
+# este es models.py
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-class Usuario(models.Model):
+class Usuario(AbstractUser):
     ROLE_CHOICES = (
         ('profesor', 'Profesor'),
         ('alumno', 'Alumno'),
@@ -10,6 +12,7 @@ class Usuario(models.Model):
     username = models.CharField(max_length=255, unique=True)
     password = models.CharField(max_length=255)  
     role = models.CharField(max_length=50, choices=ROLE_CHOICES)
+    email = models.EmailField(unique=True) 
 
     def __str__(self):
         return self.username

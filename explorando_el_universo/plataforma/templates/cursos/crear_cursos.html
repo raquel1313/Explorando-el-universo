@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center display-5 fw-bold">Crear Curso</h1>
+    <p class="text-center text-muted">Completa el formulario para crear un nuevo curso.</p>
+</div>
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="card shadow-lg p-4" style="width: 100%; max-width: 500px;">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="nombre" class="form-label fw-bold">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Escribe el nombre del curso" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="descripcion" class="form-label fw-bold">Descripción</label>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="3" placeholder="Escribe una breve descripción del curso" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="profesor" class="form-label fw-bold">Profesor</label>
+                <select class="form-select" id="profesor" name="profesor" required>
+                    <option value="" selected disabled>Selecciona un profesor</option>
+                    <option value="1">Profesor 1</option>
+                    <option value="2">Profesor 2</option>
+                    <option value="3">Profesor 3</option>
+                </select>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary btn-block">Crear Curso</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
