@@ -12,8 +12,11 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ curso.nombre }}</h5>
                     <p class="card-text">{{ curso.descripcion }}</p>
-                    <p class="card-text"><strong>Profesor:</strong> {{ curso.profesor.nombre }}</p>
-                    <a href="{% url 'detalle_curso' curso.id %}" class="btn btn-primary">Ver Detalles</a>
+                    <p class="card-text"><strong>Profesor:</strong> {{ curso.profesor.username }}</p>  <!-- Cambia "nombre" a "username" si es necesario -->
+                    <a href="" class="btn btn-primary">Ver Detalles</a>
+                    {% if user.role == 'alumno' %}
+                    <a href="" class="btn btn-primary">Inscribirme</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -23,7 +23,9 @@
               <li><a href="{% url 'cursos' %}" class="nav-link px-2 text-white">Cursos</a></li>
               <li><a href="{% url 'progreso' %}" class="nav-link px-2 text-white">Mi progreso</a></li>
               <li><a href="{% url 'profile' %}" class="nav-link px-2 text-white">Perfil</a></li>
-              <li><a href="{% url 'crear_curso' %}" class="nav-link px-2 text-white">Crear Curso</a></li>
+              {% if user.role == 'profesor' %}
+              <li><a href="{% url 'crear_curso' %}" class="nav-link px-2 text-white">Crear curso</a></li>
+              {% endif %}
               <li><a href="#" class="nav-link px-2 text-white">Acerca de</a></li>
             </ul>
       
