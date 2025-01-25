@@ -16,9 +16,6 @@ class HomeView(TemplateView):
 class RegistroView(TemplateView):
     template_name = 'registro.html'
     
-class CursosView(TemplateView):
-    template_name = 'cursos.html'
-    
 class ProgresoView(TemplateView):
     template_name = 'progreso.html'
     
@@ -56,13 +53,21 @@ def registro(request):
         form = RegistroForm()
     return render(request, 'registration/registro.html', {'form': form})
 
+@login_required  # Asegúrate de que solo los usuarios autenticados puedan acceder
 def crear_curso(request):
     if request.method == 'POST':
         nombre = request.POST['nombre']
         descripcion = request.POST['descripcion']
-        curso = Curso.objects.create(nombre=nombre, descripcion=descripcion)
-        profesor= request.POST['profesor']
-        return redirect('cursos')
+        
+        # Aquí usamos request.user para guardar el ID del usuario conectado como profesor
+        curso = Curso.objects.create(
+            nombre=nombre,
+            descripcion=descripcion,
+            profesor=request.user  # Almacena el usuario conectado en el campo profesor
+        )
+
+        return redirect('cursos')  # Redirige a la lista de cursos
+
     return render(request, 'cursos/crear_cursos.html', {})
 
 def lista_cursos(request):

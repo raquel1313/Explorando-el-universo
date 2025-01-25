@@ -1,25 +1,35 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<div class="container my-3">
+<div class="container my-5">
     <div class="row">
         <div class="col-md-4">
-            
-            <div class="card border rounded-2 shadow p-3 mb-3">
-                <img class="img-thumbnail rounded-circle mb-3" src="" alt="{{ user.username }}" style="width: 100px;">
-                <h2>{{ user.first_name }} {{ user.last_name }}</h2>
-                <h4>Grupo al que pertenece </h4>
-                <p><strong>Nombre de usuario: </strong>{{ user.username }}</p>
+            <div class="card border rounded-3 shadow-sm p-4 mb-4">
+                <div class="text-center">
+                    <img class="img-thumbnail rounded-circle mb-3" src="{% static 'user.png' %}" alt="{{ user.username }}" style="width: 100px; height: 100px;">
+                    <h2 class="fw-bold">{{ user.first_name }} {{ user.last_name }}</h2>
+                    <p class="mt-2"><strong>Nombre de usuario: </strong>{{ user.username }}</p>
+                    <p class="mt-2">{{ user.role|capfirst }}</p>
+                </div>
                 <hr>
-                <a class="btn btn-outline-secondary" href="">Editar perfil</a>
-                <form action="{% url 'logout' %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger">Cerrar sesión</button>
-                </form>
+                <div class="d-flex justify-content-between">
+                    <a class="btn btn-outline-secondary" href="">Editar perfil</a>
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Cerrar sesión</button>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="col-md-8">
-            
+            <div class="card border rounded-3 shadow-sm mb-4">
+                <div class="card-body">
+                    <h4 class="fw-bold">Información Adicional</h4>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed provident debitis nam totam voluptates, dignissimos, perspiciatis ipsa voluptatibus aperiam ea veniam, repudiandae tenetur? Corporis hic voluptatibus dolor ea facilis unde.
+                    </p>
+                    
+                </div>
+            </div>
         </div>
     </div>
 </div>
