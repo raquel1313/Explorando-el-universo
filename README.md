@@ -6,7 +6,7 @@
 
 ## 2. Características
 - Registro y autenticación de usuarios (estudiantes y profesores).
-- Gestión de cursos incluyendo creación, edición<span style="color:red">(falta implementar)</span> y eliminación<span style="color:red">(falta implementar)</span>.
+- Gestión de cursos incluyendo creación, edición y eliminación.
 - Evaluaciones manuales y automáticas.<span style="color:red">(falta implementar)</span>
 - Foros de discusión para interacción entre estudiantes y profesores.<span style="color:red">(falta implementar)</span>
 - Visualización del progreso y certificaciones al finalizar cursos.<span style="color:red">(falta implementar)</span>
