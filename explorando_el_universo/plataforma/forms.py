@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import Usuario
+from .models import Usuario, Contenido
 
 class RegistroForm(forms.ModelForm):
     password1 = forms.CharField(
@@ -29,3 +29,14 @@ class RegistroForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+
+class ContenidoForm(forms.ModelForm):
+    class Meta:
+        model = Contenido
+        fields = ['video_url', 'informacion']  # Campos que deseas mostrar en el formulario
+        widgets = {
+            'video_url': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la URL del video'}),
+            'informacion': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ingrese la información del contenido'}),
+        }

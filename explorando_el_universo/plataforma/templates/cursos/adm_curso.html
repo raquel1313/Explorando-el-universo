@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center display-5 fw-bold">Mis Cursos</h1>
+    <p class="text-center text-muted">Aquí puedes gestionar los cursos donde eres el profesor.</p>
+
+    <div class="row">
+        {% for curso in cursos %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title">{{ curso.nombre }}</h5>
+                    <p class="card-text">{{ curso.descripcion }}</p>
+                    <p class="card-text"><strong>Profesor:</strong> {{ curso.profesor.username }}</p>
+                    <a href="{% url 'contenido_curso' curso.id %}" class="btn btn-primary">Ver Contenido</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No tienes cursos disponibles.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Botón para agregar curso -->
+    <div class="text-center my-4">
+        <a href="{% url 'crear_curso' %}" class="btn btn-success">Agregar Curso</a>
+    </div>
+</div>
+{% endblock %}
