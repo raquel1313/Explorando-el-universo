@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <h1>Agregar Contenido al Curso: {{ curso.nombre }}</h1>
+
+    <form method="post" id="formulario-agregar-contenido">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="video_url" class="form-label">URL del Video</label>
+            {{ form.video_url }}  <!-- Campo del formulario para la URL del video -->
+            <small class="form-text text-muted">Ingresa una URL válida de un video (por ejemplo, de YouTube).</small>
+        </div>
+        <div class="mb-3">
+            <label for="informacion" class="form-label">Información del Contenido</label>
+            {{ form.informacion }}  <!-- Campo del formulario para información del contenido -->
+        </div>
+        <button type="submit" class="btn btn-success">Agregar Contenido</button>
+    </form>
+
+    <h3 class="mt-4">Vista Previa del Video</h3>
+    <div id="video-preview" class="mb-3">
+        <!-- El video se mostrará aquí -->
+    </div>
+
+    <a href="{% url 'contenido_curso' curso.id %}" class="btn btn-secondary">Cancelar</a>
+</div>
+
+<script>
+    // Escuchar el evento de cambio en el campo de URL
+    document.getElementById('id_video_url').addEventListener('input', function() {
+        var url = this.value;
+        var preview = document.getElementById('video-preview');
+
+        // Filtra la URL para obtener solo el ID de video si es de YouTube
+        var videoId = url.split('v=')[1];
+        if(!videoId) return; // Si no hay ID, no hacer nada
+        var ampersandPosition = videoId.indexOf('&');
+        if (ampersandPosition != -1) {
+            videoId = videoId.substring(0, ampersandPosition);
+        }
+
+        // Crea el iframe para mostrar el video
+        preview.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>';
+    });
+</script>
+{% endblock %}

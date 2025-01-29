@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4">Mis Cursos Inscritos</h1>
+    
+    {% if cursos %}
+        <div class="row">
+            {% for curso in cursos %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ curso.nombre }}</h5>
+                            <p class="card-text">{{ curso.descripcion|truncatechars:100 }}</p>
+                            <p class="card-text"><small class="text-muted">Profesor: </strong> {{ curso.profesor.username }}</small></p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <div class="container-fluid d-flex">
+                                <a href="{% url 'contenido_curso' curso.id %}" class="btn btn-primary btn-sm me-2">Ver contenido del curso</a>
+                                <a href="#" class="btn btn-primary btn-sm">Continuar donde quedé</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No estás inscrito en ningún curso actualmente.</p>
+    {% endif %}
+</div>
+{% endblock %}

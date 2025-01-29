@@ -19,19 +19,21 @@
             </a>
       
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="{% url 'home' %}" class="nav-link px-2 text-secondary">Inicio</a></li>
-              <li><a href="{% url 'cursos' %}" class="nav-link px-2 text-white">Cursos</a></li>
+              <li><a href="{% url 'home' %}" class="nav-link px-2 text-white">Inicio</a></li>
+              <li><a href="{% url 'cursos' %}" class="nav-link px-2 text-white">Cursos disponibles</a></li>
+              {% if user.role == 'alumno' %}
+              <li><a href="{% url 'cursos_inscritos' %}" class="nav-link px-2 text-white">Mis cursos</a></li>
               <li><a href="{% url 'progreso' %}" class="nav-link px-2 text-white">Mi progreso</a></li>
+              {% endif %}
               <li><a href="{% url 'profile' %}" class="nav-link px-2 text-white">Perfil</a></li>
               {% if user.role == 'profesor' %}
-              <li><a href="{% url 'crear_curso' %}" class="nav-link px-2 text-white">Crear curso</a></li>
+              <li><a href="{% url 'adm_curso' %}" class="nav-link px-2 text-white">Administrar cursos</a></li>
               {% endif %}
-              <li><a href="#" class="nav-link px-2 text-white">Acerca de</a></li>
             </ul>
       
-            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+            <!-- <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
               <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-            </form>
+            </form> -->
       
             <div class="text-end">
               {% if request.user.is_authenticated %} 
