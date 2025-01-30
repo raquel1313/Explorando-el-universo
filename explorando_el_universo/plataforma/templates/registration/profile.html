@@ -8,7 +8,8 @@
                 <div class="text-center">
                     <img class="img-thumbnail rounded-circle mb-3" src="{% static 'user.png' %}" alt="{{ user.username }}" style="width: 100px; height: 100px;">
                     <h2 class="fw-bold">{{ user.first_name }} {{ user.last_name }}</h2>
-                    <p class="mt-2"><strong>Nombre de usuario: </strong>{{ user.username }}</p>
+                    <p class="mt-2"><strong>Nombre: </strong>{{ user.username }}</p>
+                    <p class="mt-2"><strong>Correo: </strong>{{ user.email }}</p>
                     <p class="mt-2">{{ user.role|capfirst }}</p>
                 </div>
                 <hr>

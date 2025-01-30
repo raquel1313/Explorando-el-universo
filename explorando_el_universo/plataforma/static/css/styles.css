@@ -1,0 +1,80 @@
+/* static/css/style.css */
+
+.color1 { color: #ffbe64; }
+.color2 { color: #f4d978; }
+.color3 { color: #003c7e; }
+.color4 { color: #007988; }
+.color5 { color: #00b89f; }
+
+/* Estilo para el header */
+header {
+    background-color: #007988; /* Color de fondo del header usando color4 */
+    color: white; /* Color del texto en el header */
+}
+
+
+/* Ejemplo de cómo aplicar estas clases */
+.nav-link {
+    transition: color 0.3s ease; /* Transición suave para cambio de color */
+}
+
+.nav-link:hover {
+    color: #007988; /* Cambia a color4 al pasar el mouse (opcional) */
+}
+/* Estilos generales */
+body {
+    background-color: #f8f9fa; /* Color de fondo */
+    color: #212529; /* Color de texto predeterminado */
+}
+
+/* Estilo para la barra de navegación */
+.navbar-dark .navbar-nav .nav-link {
+    color: #f8f9fa; /* Color de texto de los enlaces en la navegación */
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #ffbe64; /* Color en hover de los enlaces */
+}
+
+.navbar-dark .navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1); /* Color del borde del botón de menú hamburguesa */
+}
+
+/* Estilo para el logo */
+img {
+    max-width: 100%;        /* Evita que las imágenes excedan el ancho de su contenedor */
+    height: auto;           /* Mantiene la proporción de las imágenes */
+}
+
+/* Botones */
+.btn {
+    border-radius: 20px;    /* Bordes redondeados para los botones */
+    transition: background-color 0.3s ease; /* Efecto de transición para el hover */
+}
+.btn-primary:hover {
+    background-color: #0056b3; /* Color de fondo en hover para el botón primario */
+}
+
+/* Estilo para el contenido */
+.container {
+    margin-bottom: 2rem;  /* Espacio entre secciones */
+}
+
+/* Cards */
+.card {
+    border: none;           /* Quita el borde por defecto */
+    transition: transform 0.2s; /* Efecto de transición al pasar el mouse */
+}
+.card:hover {
+    transform: scale(1.05); /* Aumenta el tamaño cuando se pasa el mouse */
+}
+
+/* Sección de comentarios */
+.card.mb-2 {              /* Espaciado para comentarios */
+    border: 1px solid #e0e0e0; /* Borde suave */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilo para los formularios */
+.form-control {
+    border-radius: 5px; /* Bordes redondeados para campos de formulario */
+}

@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import Usuario, Contenido
+from .models import Usuario, Contenido, Comentario
 
 class RegistroForm(forms.ModelForm):
     password1 = forms.CharField(
@@ -39,4 +39,12 @@ class ContenidoForm(forms.ModelForm):
         widgets = {
             'video_url': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la URL del video'}),
             'informacion': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Ingrese la información del contenido'}),
+        }
+        
+class ComentarioForm(forms.ModelForm):
+    class Meta:
+        model = Comentario
+        fields = ['contenido']  # Aquí incluyes solo el campo de contenido
+        widgets = {
+            'contenido': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Escribe tu comentario aquí...', 'rows': 3}),
         }
