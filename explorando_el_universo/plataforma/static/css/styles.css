@@ -78,3 +78,82 @@ img {
 .form-control {
     border-radius: 5px; /* Bordes redondeados para campos de formulario */
 }
+
+/* Estilos para dispositivos móviles (pantallas hasta 768px) */
+@media (max-width: 768px) {
+    header {
+        padding: 1rem; /* Ajusta el padding del header */
+        font-size: 1.2rem; /* Cambia el tamaño de la fuente */
+    }
+
+    .nav-link {
+        font-size: 1rem; /*  Ajusta el tamaño de la fuente de los enlaces de navegación */
+    }
+
+    .container {
+        margin-bottom: 1rem; /* Reduce el espaciado entre secciones */
+    }
+
+    .card {
+        margin: 0.5rem; /* Espaciado reduce para cards */
+    }
+
+    .btn {
+        width: 100%; /* Botones ocupan el 100% del ancho */
+        margin: 0.5rem 0; /* Margen para separarlos */
+    }
+}
+
+/* Estilos para tabletas (pantallas entre 769px y 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .nav-link {
+        font-size: 1.2rem; /* Ajusta el tamaño de la fuente de los enlaces de navegación */
+    }
+
+    .container {
+        margin-bottom: 1.5rem; /* Ajusta el espaciado entre secciones */
+    }
+
+    .card {
+        margin: 1rem; /* Espaciado aumentado para cards */
+    }
+}
+
+/* Estilos para pantallas grandes (pantallas mayores de 1024px) */
+@media (min-width: 1025px) {
+    header {
+        padding: 2rem; /* Mayor padding del header para pantallas grandes */
+        font-size: 1.5rem; /* Tamaño de fuente más grande para el header */
+    }
+
+    .nav-link {
+        font-size: 1.5rem; /* Tamaño de fuente más grande para enlaces de navegación */
+    }
+}
+
+
+
+/* CSS para video responsivo */
+.video-responsive {
+    position: relative;
+    overflow: hidden;
+    padding-top: 56.25%; /* Proporción 16:9 */
+}
+
+.video-responsive iframe,
+.video-responsive video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .video-responsive {
+        padding-top: 40%; /* Ajusta la altura para pantallas móviles */
+        width: 80%; /* Ancho del video más pequeño */
+        margin: 0 auto; /* Centra el video */
+    }
+}

@@ -42,7 +42,7 @@
         }
 
         // Crea el iframe para mostrar el video
-        preview.innerHTML = '<iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe>';
+        preview.innerHTML = '<div class="video-responsive"><iframe width="560" height="315" src="https://www.youtube.com/embed/' + videoId + '" frameborder="0" allowfullscreen></iframe></div>';
     });
 </script>
 {% endblock %}

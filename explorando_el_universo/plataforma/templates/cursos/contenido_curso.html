@@ -4,7 +4,7 @@
 {% block content %}
 <div class="container my-5">
     <h1 class="text-center display-4 fw-bold text-body-emphasis my-4">{{ curso.nombre }}</h1>
-    <p>{{ curso.descripcion }}</p>
+    <h5 class="text-center">{{ curso.descripcion }}</h5>
 
     <h2 class="text-center mt-5 mb-2">Contenido del Curso</h2>
 
@@ -16,7 +16,9 @@
                     
                     <h5 class="m-3">{{ item.informacion }}</h5>
                     {% if item.video_url %}
+                    <div class="video-responsive">
                         <iframe class="m-2" width="560" height="315" src="{{ item.video_url }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
                     {% endif %}
                     
                     <p><small class="text-muted">Fecha de subida: {{ item.fecha_subida }}</small></p>
