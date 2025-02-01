@@ -3,40 +3,64 @@
 
 {% block content %}
 <div class="container my-5">
-    <h1>{{ curso.nombre }}</h1>
-    <p>{{ curso.descripcion }}</p>
+    <h1 class="text-center display-4 fw-bold text-body-emphasis my-4">{{ curso.nombre }}</h1>
+    <h5 class="text-center">{{ curso.descripcion }}</h5>
 
-    <h2>Contenido del Curso</h2>
+    <h2 class="text-center mt-5 mb-2">Contenido del Curso</h2>
+
     {% if contenido %}
         <ul class="list-group">
             {% for item in contenido %}
+            <div class="container-fluid m-2">
                 <li class="list-group-item">
-                    <h5>{{ item.informacion }}</h5>
+                    
+                    <h5 class="m-3">{{ item.informacion }}</h5>
                     {% if item.video_url %}
-                        <iframe width="560" height="315" src="{{ item.video_url }}" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-responsive">
+                        <iframe class="m-2" width="560" height="315" src="{{ item.video_url }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
                     {% endif %}
                     
                     <p><small class="text-muted">Fecha de subida: {{ item.fecha_subida }}</small></p>
+                
                 </li>
+            </div>
             {% endfor %}
         </ul>
     {% else %}
         <p>No hay contenido disponible para este curso.</p>
     {% endif %}
     
-    {% if user.role == 'alumno' %}
-    <form action="{% url 'eliminar_inscripcion' curso.id %}" method="post" style="display:inline;">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Eliminar Inscripción</button>
-    </form>
-    <a href="{% url 'cursos_inscritos' %}" class="btn btn-primary">Regresar a Mis Cursos</a>
-    {% else %}
-    
-    <a href="{% url 'agregar_contenido' curso.id %}" class="btn btn-secondary">Agregar contenido</a>
-    <a href="{% url 'eliminar_curso' curso.id %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este curso?');">Eliminar curso</a>
-    <div class="container m-5">
-        <a href="{% url 'adm_curso' %}" class="btn btn-primary">Regresar a Administrar cursos</a>
+    <h3 class="text-center mt-5 mb-2">Comentarios</h3>
+    <div>
+        {% for comentario in comentarios %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <p><strong class="text-danger">{{ comentario.usuario.username }}</strong>: {{ comentario.contenido }}</p>
+                    <p><small class="text-muted">{{ comentario.fecha }}</small></p>
+                </div>
+            </div>
+        {% empty %}
+            <p>No hay comentarios aún.</p>
+        {% endfor %}
     </div>
+    <h3 class="text-center mt-5">Agregar un Comentario</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ comentario_form.as_p }}  <!-- Renderiza el formulario de comentarios -->
+        <button type="submit" class="btn btn-success">Agregar Comentario</button>
+    </form>
+    {% if user.role == 'alumno' %}
+        <a href="{% url 'cursos_inscritos' %}" class="btn btn-primary">Regresar a Mis Cursos</a>
+    {% else %}
+    <div class="container m-5"></div>
+        <a href="{% url 'agregar_contenido' curso.id %}" class="btn btn-secondary">Agregar contenido</a>
+        <a href="{% url 'eliminar_curso' curso.id %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este curso?');">Eliminar curso</a>
+        
+        <a href="{% url 'adm_curso' %}" class="btn btn-primary">Regresar</a>
+        </div>
     {% endif %}
+    
+    
 </div>
 {% endblock %}

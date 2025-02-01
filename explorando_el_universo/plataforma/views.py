@@ -110,10 +110,27 @@ def contenido_curso(request, curso_id):
                 video_id = video_id[:ampersand_position]
             item.video_url = f"https://www.youtube.com/embed/{video_id}"  # Cambia la URL para el iframe
 
+    # Captura los comentarios asociados al contenido
+    comentarios = Comentario.objects.filter(contenido_asociado__in=contenido).order_by('fecha')  # Obtener comentarios ordenados por fecha
+
+    if request.method == 'POST':
+        comentario_form = ComentarioForm(request.POST)
+        if comentario_form.is_valid():
+            comentario = comentario_form.save(commit=False)
+            comentario.usuario = request.user  # Asociar el comentario con el usuario autenticado
+            comentario.contenido_asociado = contenido.first()  # Asociar con el primer contenido relacionado
+            comentario.save()
+            return redirect('contenido_curso', curso_id=curso.id)  # Redirigir para ver el nuevo comentario
+    else:
+        comentario_form = ComentarioForm()
+
     context = {
         'curso': curso,
         'contenido': contenido,
+        'comentarios': comentarios,
+        'comentario_form': comentario_form,
     }
+    
     return render(request, 'cursos/contenido_curso.html', context)
 
 @login_required
@@ -157,20 +174,5 @@ def agregar_contenido(request, curso_id):
     else:
         form = ContenidoForm()
 
-    return render(request, 'agregar_contenido.html', {'form': form, 'curso': curso})
-
-@login_required
-def agregar_contenido(request, curso_id):
-    curso = get_object_or_404(Curso, id=curso_id)
-
-    if request.method == 'POST':
-        form = ContenidoForm(request.POST)
-        if form.is_valid():
-            contenido = form.save(commit=False)
-            contenido.curso = curso  # Asociar el contenido con el curso
-            contenido.save()
-            return redirect('contenido_curso', curso_id=curso.id)  # Redirigir a la página de contenido
-    else:
-        form = ContenidoForm()
-
     return render(request, 'cursos/agregar_contenido.html', {'form': form, 'curso': curso})
+
